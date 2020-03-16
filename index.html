@@ -774,58 +774,35 @@
 <script src="//static8.ziroom.com/phoenix/pc/js/2019/lib/videojs-ie8.min.js"></script>
 <script src="//static8.ziroom.com/phoenix/pc/js/2019/lib/video.min.js"></script>
 <script type="text/javascript">
-// baidu&gio
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?4f083817a81bcb8eed537963fc1bbf10";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
 
-var _vds = _vds || [];
-window._vds = _vds;
-(function(){
-  _vds.push(['uid', '']);
-  _vds.push(['setAccountId', '8da2730aaedd7628']);
-  (function() {
-    var vds = document.createElement('script');
-    vds.type='text/javascript';
-    vds.async = true;
-    vds.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'dn-growing.qbox.me/vds.js';
-    var s = document.getElementsByTagName('script')[0];
-    s.parentNode.insertBefore(vds, s);
-  })();
-})();
 (function(para) {
-    var p = para.sdk_url, n = para.name, w = window, d = document, s = 'script',x = null,y = null;
-    w['sensorsDataAnalytic201505'] = n;
-    w[n] = w[n] || function(a) {return function() {(w[n]._q = w[n]._q || []).push([a, arguments]);}};
-    var ifs = ['track','quick','register','registerPage','registerOnce','trackSignup', 'trackAbtest', 'setProfile','setOnceProfile','appendProfile', 'incrementProfile', 'deleteProfile', 'unsetProfile', 'identify','login','logout','trackLink','clearAllRegister'];
-    for (var i = 0; i < ifs.length; i++) {
-        w[n][ifs[i]] = w[n].call(null, ifs[i]);
-    }
-    if (!w[n]._t) {
-        x = d.createElement(s), y = d.getElementsByTagName(s)[0];
-        x.async = 1;
-        x.src = p;
-        w[n].para = para;
-        y.parentNode.insertBefore(x, y);
-    }
-    })({
-        sdk_url:"//static.sensorsdata.cn/sdk/1.13.10/sensorsdata.min.js",  
-        name: 'sensors',
-        server_url:'//tianyanimport.ziroom.com:8106/sa?project=production',
-        heatmap_url: "//static.sensorsdata.cn/sdk/1.13.10/heatmap.min.js",
-        web_url:"//tianyan.ziroom.com",
-        heatmap: {
-            clickmap:'default',
-            scroll_notice_map:'not_collect'
-        }
-    });
-sensors.registerPage({
-    platformType:'PC',
-    cid:110000})
+  var p = para.sdk_url, n = para.name, w = window, d = document, s = 'script',x = null,y = null;
+  if(typeof(w['sensorsDataAnalytic201505']) !== 'undefined') {
+      return false;
+  }
+  w['sensorsDataAnalytic201505'] = n;
+  w[n] = w[n] || function(a) {return function() {(w[n]._q = w[n]._q || []).push([a, arguments]);}};
+  var ifs = ['track','quick','register','registerPage','registerOnce','trackSignup', 'trackAbtest', 'setProfile','setOnceProfile','appendProfile', 'incrementProfile', 'deleteProfile', 'unsetProfile', 'identify','login','logout','trackLink','clearAllRegister','getAppStatus'];
+  for (var i = 0; i < ifs.length; i++) {
+    w[n][ifs[i]] = w[n].call(null, ifs[i]);
+  }
+  if (!w[n]._t) {
+    x = d.createElement(s), y = d.getElementsByTagName(s)[0];
+    x.async = 1;
+    x.src = p;
+    x.setAttribute('charset','UTF-8');
+    w[n].para = para;
+    y.parentNode.insertBefore(x, y);
+  }
+})({
+  sdk_url: 'https://cdn.jsdelivr.net/npm/sa-sdk-javascript@1.14.23/sensorsdata.min.js',
+  heatmap_url: 'https://cdn.jsdelivr.net/npm/sa-sdk-javascript@1.14.23/heatmap.min.js',
+  name: 'sensors',
+  server_url: 'https://test-syg.datasink.sensorsdata.cn/sa?token=27f1e21b78daf376&project=xubo',
+  heatmap:{scroll_notice_map:'not_collect'}
+});
+console.log('jjjjjj', location.search);
+
 sensors.quick('autoTrack');
 </script>
 <script src="//static8.ziroom.com/phoenix/pc/js/2019/index.js?2019123112103"></script>
