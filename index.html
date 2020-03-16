@@ -35,28 +35,28 @@
         server_url: 'https://test-syg.datasink.sensorsdata.cn/sa?token=27f1e21b78daf376&project=xubo',
         heatmap:{scroll_notice_map:'not_collect'}
         });
-        // function parseSearch(str){
-        //     var distinct_id = '';
-        //     if(str){
-        //         let reg = /([\w_]+)=([\w\d]+)/;
-        //         let result = reg.exec(str);
-        //         if(result[1] === 'distinct_id'){
-        //             distinct_id = result[2];
-        //         }
-        //     }
-        //     return distinct_id;
-        // }
-        // console.log('123');
-        // var search = location.search
-        // if( search && search.startsWith('?')){
-        //     console.log('kkkkk',search.startsWith('?'));
-        //     var searchArray = search.slice(0).split('&');
-        //     for(let e of searchArray){
-        //         if(parseSearch(e)){
-        //             sensors.identify(parseSearch(e), true)
-        //         };
-        //     }
-        // }
+        function parseSearch(str){
+            var distinct_id = '';
+            if(str){
+                let reg = /([\w_]+)=([\w\d]+)/;
+                let result = reg.exec(str);
+                if(result[1] === 'distinct_id'){
+                    distinct_id = result[2];
+                }
+            }
+            return distinct_id;
+        }
+        console.log('123');
+        var search = location.search
+        if( search && search.startsWith('?')){
+            console.log('kkkkk',search.startsWith('?'));
+            var searchArray = search.slice(0).split('&');
+            for(let e of searchArray){
+                if(parseSearch(e)){
+                    sensors.identify(parseSearch(e), true)
+                };
+            }
+        }
 
         sensors.quick('autoTrack');
 </script>
