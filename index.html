@@ -38,7 +38,7 @@
         function parseSearch(str){
             var distinct_id = '';
             if(str){
-                let reg = /([\w_]+)=([\w\d]+)/;
+                let reg = /([\w_]+)=([\w\d-]+)/;
                 let result = reg.exec(str);
                 if(result[1] === 'distinct_id'){
                     distinct_id = result[2];
