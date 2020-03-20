@@ -10,6 +10,20 @@
     hello world
     <script type="text/javascript">
         console.log('wx', wx);
+        wx.onMenuShareQQ({
+            title: '', // 分享标题
+            desc: '', // 分享描述
+            link: '', // 分享链接
+            imgUrl: '', // 分享图标
+            success: function () {
+            // 用户确认分享后执行的回调函数
+            },
+            cancel: function () {
+            // 用户取消分享后执行的回调函数
+            }
+        });
+
+       
         console.log('webview date', new Date().getTime());
         (function(para) {
         var p = para.sdk_url, n = para.name, w = window, d = document, s = 'script',x = null,y = null;
