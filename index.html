@@ -58,7 +58,7 @@
                 if(!query || typeof query !== 'string'){
                     return '';
                 }
-                if(!key || typeof query !== 'string'){
+                if(!key || typeof key !== 'string'){
                     return '';
                 }
 
@@ -68,7 +68,7 @@
             }
             console.log('navigator.userAgent', navigator.userAgent);
             if(navigator.userAgent.match(/miniProgram/i)){
-                if( !(search && search.indexOf('?') === -1)){
+                if( !(search && search.indexOf('?') >= 0)){
                     return;    
                 }
                 const query = search.slice(1);
@@ -78,8 +78,8 @@
                     sensors.identify(distinctID, true);
                 }   
             }
-        }
-        identify();
+        }identify();
+        
         sensors.quick('autoTrack');
 </script>
 
