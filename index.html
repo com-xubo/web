@@ -66,6 +66,7 @@
                 let value = paramObj.get(key);
                 return value ? value : '';
             }
+            console.log('navigator.userAgent', navigator.userAgent);
             if(navigator.userAgent.match(/miniProgram/i)){
                 if( !(search && search.indexOf('?') === -1)){
                     return;    
@@ -73,6 +74,7 @@
                 const query = search.slice(1);
                 if(search.indexOf('distinct_id') >= 0){
                     let distinctID = getQueryValue(query, 'distinct_id');
+                    console.log('distinctID', distinctID);
                     sensors.identify(distinctID, true);
                 }   
             }
