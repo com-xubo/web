@@ -69,9 +69,9 @@
                 return value ? value : '';
             }
 
-            function getOpenid(code){
+            function getOpenid(code, success){
                 $.ajax({
-                    url: 'http://www.demo.com:8081/:8081/getOpenid',
+                    url: '获取 openid url',
                     header: {
                         'content-type': 'application/x-www-form-urlencoded'
                     },
@@ -80,11 +80,10 @@
                         code
                     }, 
                     success: function(res){
-                        console.log('llll', res)
+                        success(res);
                     }
                 });
             }
-            getOpenid('011bj0Qj28UlMA0yuLMj23E7Qj2bj0QG');
 
             console.log('navigator.userAgent', navigator.userAgent);
             if(navigator.userAgent.match(/miniProgram/i)){
@@ -94,8 +93,14 @@
                 const query = search.slice(1);
                 if(search.indexOf('code') >= 0){
                     let code = getQueryValue(query, 'code');
-
-                    sensors.identify(distinctID, true);
+                    console.log('code', code);
+                    var success = function(res){
+                        saInit();
+                        sensors.identify(res.openid, true);
+                        sensors.quick('autoTrack');
+                    }
+                    getOpenid(code, success);
+                    
                 }   
             }
         };
