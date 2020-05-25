@@ -68,7 +68,7 @@
             }
             console.log('navigator.userAgent', navigator.userAgent);
             if(navigator.userAgent.match(/miniProgram/i)){
-                if( !search || search.indexOf('?') === -1)){
+                if( !search || search.indexOf('?') === -1){
                     return;    
                 }
                 const query = search.slice(1);
