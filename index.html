@@ -7,24 +7,8 @@
     <title>Document</title>
 </head>
 <body>
-    hello world
-    <script type="text/javascript">
-        console.log('wx', wx);
-        wx.onMenuShareQQ({
-            title: '', // 分享标题
-            desc: '', // 分享描述
-            link: '', // 分享链接
-            imgUrl: '', // 分享图标
-            success: function () {
-            // 用户确认分享后执行的回调函数
-            },
-            cancel: function () {
-            // 用户取消分享后执行的回调函数
-            }
-        });
-
-       
-        console.log('webview date', new Date().getTime());
+    <h1>hello world</h1>
+   <script>
         (function(para) {
         var p = para.sdk_url, n = para.name, w = window, d = document, s = 'script',x = null,y = null;
         if(typeof(w['sensorsDataAnalytic201505']) !== 'undefined') {
@@ -45,36 +29,57 @@
             y.parentNode.insertBefore(x, y);
         }
         })({
-        sdk_url: 'https://cdn.jsdelivr.net/npm/sa-sdk-javascript@1.14.23/sensorsdata.min.js',
-        heatmap_url: 'https://cdn.jsdelivr.net/npm/sa-sdk-javascript@1.14.23/heatmap.min.js',
-        name: 'sensors',
-        server_url: 'https://test-syg.datasink.sensorsdata.cn/sa?token=27f1e21b78daf376&project=xubo',
-        heatmap:{scroll_notice_map:'not_collect'}
+            show_log: true,
+            sdk_url: 'https://cdn.jsdelivr.net/npm/sa-sdk-javascript@1.15.5/sensorsdata.min.js',
+            heatmap_url: 'https://cdn.jsdelivr.net/npm/sa-sdk-javascript@1.15.5/heatmap.min.js',
+            name: 'sensors',
+            server_url: 'https://test-syg.datasink.sensorsdata.cn/sa?token=27f1e21b78daf376&project=xubo'
         });
-        function parseSearch(str){
-            var distinct_id = '';
-            if(str){
-                let reg = /([\w_]+)=([\w\d-]+)/;
-                let result = reg.exec(str);
-                if(result[1] === 'distinct_id'){
-                    distinct_id = result[2];
-                }
-            }
-            return distinct_id;
-        }
-        console.log('123');
-        var search = location.search
-        if( search && search.startsWith('?')){
-            console.log('kkkkk',search.startsWith('?'));
-            var searchArray = search.slice(0).split('&');
-            for(let e of searchArray){
-                if(parseSearch(e)){
-                    sensors.identify(parseSearch(e), true)
-                };
-            }
-        }
+       
 
+        const identify = function(){
+            const search = document.location.search;
+            function parseQuery(query){
+                let paramEntry = []; 
+                if(query.indexOf('&') > 0){
+                    paramEntry = query.split('&');
+                }else{
+                    paramEntry.push(query);
+                }
+                paramEntry = paramEntry.map((value)=>{
+                    return value.split('=');
+                });
+
+                let paramsMap = new Map(paramEntry);
+
+                return paramsMap;
+            }
+            function getQueryValue(query, key){
+                if(!query || typeof query !== 'string'){
+                    return '';
+                }
+                if(!key || typeof query !== 'string'){
+                    return '';
+                }
+
+                let paramObj = parseQuery(query);
+                let value = paramObj.get(key);
+                return value ? value : '';
+            }
+            if(navigator.userAgent.match(/miniProgram/i)){
+                if( !(search && search.indexOf('?') === -1)){
+                    return;    
+                }
+                const query = search.slice(1);
+                if(search.indexOf('distinct_id') >= 0){
+                    let distinctID = getQueryValue(query, 'distinct_id');
+                    sensors.identify(distinctID, true);
+                }   
+            }
+        }
+        identify();
         sensors.quick('autoTrack');
 </script>
+
 </body>
 </html>
