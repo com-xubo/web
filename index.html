@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="./js/weixin.js"></script>
 </head>
 <body>
     <h1>hello world</h1>
@@ -29,56 +30,11 @@
         }
         })({
             show_log: true,
-            sdk_url: 'https://cdn.jsdelivr.net/npm/sa-sdk-javascript@1.15.5/sensorsdata.min.js',
+            sdk_url: './js/sensorsdata.js',
             heatmap_url: 'https://cdn.jsdelivr.net/npm/sa-sdk-javascript@1.15.5/heatmap.min.js',
             name: 'sensors',
             server_url: 'https://test-syg.datasink.sensorsdata.cn/sa?token=27f1e21b78daf376&project=xubo'
         });
-       
-
-        const identify = function(){
-            const search = document.location.search;
-            function parseQuery(query){
-                let paramEntry = []; 
-                if(query.indexOf('&') > 0){
-                    paramEntry = query.split('&');
-                }else{
-                    paramEntry.push(query);
-                }
-                paramEntry = paramEntry.map((value)=>{
-                    return value.split('=');
-                });
-
-                let paramsMap = new Map(paramEntry);
-
-                return paramsMap;
-            }
-            function getQueryValue(query, key){
-                if(!query || typeof query !== 'string'){
-                    return '';
-                }
-                if(!key || typeof key !== 'string'){
-                    return '';
-                }
-
-                let paramObj = parseQuery(query);
-                let value = paramObj.get(key);
-                return value ? value : '';
-            }
-            console.log('navigator.userAgent', navigator.userAgent);
-            if(navigator.userAgent.match(/miniProgram/i)){
-                if( !search || search.indexOf('?') === -1){
-                    return;    
-                }
-                const query = search.slice(1);
-                if(search.indexOf('distinct_id') >= 0){
-                    let distinctID = getQueryValue(query, 'distinct_id');
-                    console.log('distinctID', distinctID);
-                    sensors.identify(distinctID, true);
-                }   
-            }
-        };
-        identify();
         
         sensors.quick('autoTrack');
 </script>
