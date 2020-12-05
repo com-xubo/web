@@ -4,7 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="./js/weixin.js"></script>
+    
+    <script charset="UTF-8" src="./js/sensorsdata.js"></script>
+    <script charset="UTF-8">
+        var sensors = window['sensorsDataAnalytic201505'];
+        sensors.init({
+            server_url: 'http://10.120.195.209:8106/sa?project=xubo'    
+        });
+        sensors.quick('autoTrack');
+    </script>
 </head>
 <body>
     <h1>hello worldssssss</h1>
