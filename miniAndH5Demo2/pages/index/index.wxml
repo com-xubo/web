@@ -1,2 +1,0 @@
-<!--index.wxml-->
-<web-view wx:if="{{isShow}}" src="https://com-xubo.github.io/web/H5/index2.html?code={{code}}"></web-view>
